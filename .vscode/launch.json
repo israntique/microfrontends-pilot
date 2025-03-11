@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Launch Shell Proj",
+        "type": "chrome",
+        "request": "launch",
+        "preLaunchTask": "npm: start",
+        "url": "http://localhost:4200/",
+        "cwd": "${workspaceFolder}/shell",
+        "webRoot": "${workspaceFolder}/shell",
+        "sourceMaps": true,
+        "sourceMapPathOverrides": {
+          "meteor://💻app/*": "${workspaceFolder}/shell/*",
+          "webpack:///./~/*": "${workspaceFolder}/shell/node_modules/*",
+          "webpack://?:*/*": "${workspaceFolder}/shell/*",
+          "webpack:/*": "${webRoot}/shell/*",
+          "/./*": "${webRoot}/shell/*",
+          "/src/*": "${webRoot}/shell/*",
+          "/*": "*",
+          "/./~/*": "${webRoot}/shell/node_modules/*"
+        }
+      }
+    ]
+  }
