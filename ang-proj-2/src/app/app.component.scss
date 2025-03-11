@@ -1,0 +1,16 @@
+.container {
+    margin: 1rem;
+    display: flex;
+    gap: 1rem;
+
+    .btn-inc {
+        border-radius: 12px;
+        font-size: 18px;
+        background-color: burlywood;
+    }
+
+    .btn-dec {
+        border-radius: 12px;
+        font-size: 18px;
+    }
+}
