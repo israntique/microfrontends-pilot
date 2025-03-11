@@ -1,0 +1,42 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "npm",
+        "script": "start",
+        "label": "npm: start",  // This label must match preLaunchTask in launch.json
+        "detail": "Start the shell project",
+        "isBackground": true,
+        "options": {
+          "cwd": "${workspaceFolder}/shell"
+        },
+        "presentation": {
+          "focus": true,
+          "panel": "dedicated"
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "problemMatcher": {
+          "owner": "typescript",
+          "source": "ts",
+          "applyTo": "closedDocuments",
+          "fileLocation": [
+            "relative",
+            "${cwd}"
+          ],
+          "pattern": "$tsc",
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": {
+              "regexp": "(.*?)"
+            },
+            "endsPattern": {
+              "regexp": "Compiled |Failed to compile."
+            }
+          }
+        },
+      },
+    ]
+  }
