@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'mfe2-root',
+  selector: 'mfe1-root',
   standalone: true,
   imports: [],
   templateUrl: './app.component.html',
