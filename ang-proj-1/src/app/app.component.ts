@@ -1,13 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'ang-proj-1';
+
+  inc(){
+    window.dispatchEvent(
+      new CustomEvent("listeningHub", {
+        bubbles: false,
+        detail: { text: () => 1 },
+      }),
+    );
+  }
+
+  decs() {
+    window.dispatchEvent(
+      new CustomEvent("listeningHub", {
+        bubbles: true,
+        detail: { text: () => -1 },
+      }),
+    );
+  }
 }

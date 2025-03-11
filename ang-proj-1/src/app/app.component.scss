@@ -1,0 +1,15 @@
+.container {
+    margin: 1rem;
+    display: flex;
+    gap: 1rem;
+
+    .btn-inc {
+        border-radius: 12px;
+        background-color: aqua;
+    }
+
+    .btn-dec {
+        border-radius: 12px;
+        background-color: burlywood;
+    }
+}
