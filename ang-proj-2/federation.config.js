@@ -5,7 +5,6 @@ module.exports = withNativeFederation({
   name: 'ang-proj-2',
 
   exposes: {
-    './Component': './src/app/app.component.ts',
     './routes': './src/app/app.routes.ts',
   },
 
