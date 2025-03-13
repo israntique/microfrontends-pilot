@@ -2,4 +2,10 @@
 <div class="container">
   <button class="btn-inc" (click)="inc()">Increment</button>
   <button class="btn-dec" (click)="decs()">Decrement</button>
+  <button class="btn-dec" (click)="me()">Get profile</button>
+</div>
+<div>
+  <pre>
+    {{ profile | json }}
+  </pre>
 </div>

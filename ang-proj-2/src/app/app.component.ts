@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'mfe2-root',
@@ -11,8 +12,9 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@ang
 })
 export class AppComponent {
   title = 'ang-proj-2';
+  userGroup: any = null;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute, private api: ApiService) {
     this.activatedRoute.queryParams.subscribe(params => {
       console.log("mfe2. query params:", params);
     });
@@ -34,5 +36,11 @@ export class AppComponent {
         detail: { text: () => -5 },
       })
     );
+  }
+
+  getGroups() {
+    this.api.get('me/appRoleAssignments').subscribe((data) => {
+      this.userGroup = data;
+    });
   }
 }
