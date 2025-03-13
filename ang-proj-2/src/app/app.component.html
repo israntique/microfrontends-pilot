@@ -2,6 +2,10 @@
 <div class="container">
   <button class="btn-inc" (click)="inc()">Increment</button>
   <button class="btn-dec" (click)="decs()">Decrement</button>
+  <button class="btn-dec" (click)="getGroups()">User role assigments</button>
 </div>
+<pre>
+  {{ userGroup | json }}
+</pre>
 <router-outlet></router-outlet>
 
