@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, fromEvent, map, throwError } from 'rxjs';
 
 @Injectable({
@@ -9,7 +8,7 @@ export class ApiService {
   constructor() {}
 
   get<T>(endpoint: string, params?: any, skipSpinner = false): Observable<T> {
-    const messageQueueIndex = Math.random().toString(36).substr(2, 9);
+    const messageQueueIndex = this.generateMessageQueueIndex();
     window.dispatchEvent(
       new CustomEvent('shellGetApi', {
         detail: {
@@ -21,21 +20,16 @@ export class ApiService {
       })
     );
 
-    return fromEvent(
-		window,
-		'listenShellGetApi:' + messageQueueIndex
-	  ).pipe(
-		catchError(this.handleError),
-		map((data: any) => {
-		  return data.detail.result;
-		})
-	  );
+    return fromEvent(window, `listenShellGetApi:${messageQueueIndex}`).pipe(
+      catchError(this.handleError),
+      map((data: any) => data.detail.result)
+    );
   }
 
   post<T>(endpoint: string, data: any, skipSpinner = false): Observable<T> {
-    const messageQueueIndex = Math.random().toString(36).substr(2, 9);
+    const messageQueueIndex = this.generateMessageQueueIndex();
     window.dispatchEvent(
-      new CustomEvent('shellApi', {
+      new CustomEvent('shellPostApi', {
         detail: {
           messageQueueIndex,
           endpoint,
@@ -44,7 +38,7 @@ export class ApiService {
         },
       })
     );
-    return fromEvent(window, 'listenShellApi:' + messageQueueIndex).pipe(
+    return fromEvent(window, `listenShellPostApi:${messageQueueIndex}`).pipe(
       catchError(this.handleError),
       map((data: any) => data.detail.result())
     );
@@ -55,9 +49,7 @@ export class ApiService {
     return throwError(() => new Error(error.message || 'Server error'));
   }
 
-  private addSkipLoaderHeader(skipLoader: boolean): HttpHeaders {
-    return skipLoader
-      ? new HttpHeaders({ 'X-Skip-Loader': 'true' })
-      : new HttpHeaders();
+  private generateMessageQueueIndex(): string {
+    return Math.random().toString(36).substr(2, 9);
   }
 }

@@ -1,26 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiService } from './services/api.service';
 import { CommonModule } from '@angular/common';
-
-import { inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-
-export function connectRouter(router = inject(Router), useHash = false): void {
-  let url: string;
-  if (!useHash) {
-    url = `${location.pathname.substring(1)}${location.search}`;
-    router.navigateByUrl(url);
-    window.addEventListener('popstate', () => {
-      router.navigateByUrl(url);
-    });
-  } else {
-    url = `${location.hash.substring(1)}${location.search}`;
-    router.navigateByUrl(url);
-    window.addEventListener('hashchange', () => {
-      router.navigateByUrl(url);
-    });
-  }
-}
 
 @Component({
   selector: 'app-root',
@@ -32,7 +12,24 @@ export function connectRouter(router = inject(Router), useHash = false): void {
 export class AppComponent {
   title = 'ang-proj-1';
   profile: any = {};
-  constructor() {
-    connectRouter();
+  constructor(private router: Router) {
+    this.connectRouter();
+  }
+
+  private connectRouter(useHash = false): void {
+    let url: string;
+    if (!useHash) {
+      url = `${location.pathname.substring(1)}${location.search}`;
+      this.router.navigateByUrl(url);
+      window.addEventListener('popstate', () => {
+        this.router.navigateByUrl(url);
+      });
+    } else {
+      url = `${location.hash.substring(1)}${location.search}`;
+      this.router.navigateByUrl(url);
+      window.addEventListener('hashchange', () => {
+        this.router.navigateByUrl(url);
+      });
+    }
   }
 }
