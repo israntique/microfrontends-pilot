@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Home</h2>
+  <button class="btn-dec" (click)="me()">Get profile</button>
+</div>
+<div *ngIf="profile !== null">
+  <pre>
+      {{ profile | json }}
+    </pre
+  >
+</div>
