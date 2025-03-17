@@ -3,6 +3,7 @@ import { loadRemoteModule } from '@angular-architects/native-federation';
 import { HomeComponent } from './components/home/home.component';
 import { LoginFailedComponent } from './components/login-failed/login-failed.component';
 import { MsalGuard } from '@azure/msal-angular';
+import { WrapperComponent } from './components/wrapper/wrapper.component';
 
 export const routes: Routes = [
   {
@@ -17,9 +18,14 @@ export const routes: Routes = [
   },
   {
     path: 'mfe1',
-    loadComponent: () =>
-      loadRemoteModule('mfe1', './Component').then((m) => m.AppComponent),
-    canActivate: [MsalGuard],
+    component: WrapperComponent,
+    data: {
+      config: {
+        remoteName: 'mfe1',
+        exposedModule: './Component',
+        elementName: 'mfe1-root',
+      },
+    },
   },
   {
     path: 'mfe2',

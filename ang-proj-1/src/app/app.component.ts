@@ -3,7 +3,7 @@ import { ApiService } from './services/api.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'mfe1-root',
+  selector: 'app-root',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './app.component.html',

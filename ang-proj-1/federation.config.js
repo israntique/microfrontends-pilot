@@ -5,11 +5,11 @@ module.exports = withNativeFederation({
   name: 'ang-proj-1',
 
   exposes: {
-    './Component': './src/app/app.component.ts',
+    './Component': './src/bootstrap.ts',
   },
 
   shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    ...shareAll({  singleton: true, strictVersion: true, requiredVersion: 'auto' } ),
   },
 
   skip: [
