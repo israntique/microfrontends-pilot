@@ -7,7 +7,13 @@ import {
   NgZone,
   OnInit,
 } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  NavigationError,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import {
   MSAL_GUARD_CONFIG,
   MsalBroadcastService,
@@ -17,7 +23,6 @@ import {
 import { fromEvent } from 'rxjs';
 import { ApiService } from './services/api.service';
 import { MessageQueueHubService } from './services/message-queue-hub.service';
-
 
 @Component({
   selector: 'app-root',
@@ -35,7 +40,8 @@ export class AppComponent implements OnInit {
     private msalService: MsalService,
     private msalBroadcastService: MsalBroadcastService,
     private hub: MessageQueueHubService,
-    private api: ApiService
+    private api: ApiService,
+    private router: Router
   ) {
     (globalThis as any).ngZone = inject(NgZone);
     fromEvent(window, 'listeningHub').subscribe((data: any) => {
@@ -46,6 +52,16 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.msalService.handleRedirectObservable().subscribe((data) => {
       console.log('handleRedirectObservable', data);
+    });
+    this.handleRouteErrors();
+  }
+
+  handleRouteErrors() {
+    this.router.events.subscribe((event: any) => {
+      if (event instanceof NavigationError) {
+        console.error('Navigation Error:', event.error);
+        this.router.navigate(['/error']);
+      }
     });
   }
 

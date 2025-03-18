@@ -27,7 +27,12 @@ export class ApiService {
 
     return fromEvent(window, `listenShellGetApi:${messageQueueIndex}`).pipe(
       catchError(this.handleError),
-      map((data: any) => data.detail.result)
+      map((data: any) => {
+        if ( data.detail.result instanceof Error) {
+          return this.handleError(data.detail.result);
+        }
+        return data.detail.result;
+      })
     );
   }
 

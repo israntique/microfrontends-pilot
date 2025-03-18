@@ -5,6 +5,7 @@ import { LoginFailedComponent } from './components/login-failed/login-failed.com
 import { MsalGuard } from '@azure/msal-angular';
 import { WrapperComponent } from './components/wrapper/wrapper.component';
 import { startsWith } from './start-with';
+import { GeneralErrorComponent } from './components/general-error/general-error.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
     path: 'login-failed',
     component: LoginFailedComponent,
     data: { breadcrumb: ['login-failed'] },
+  },
+  {
+    path: 'error',
+    component: GeneralErrorComponent,
   },
   {
     matcher: startsWith('mfe1'),
